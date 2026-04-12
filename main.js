@@ -120,7 +120,7 @@ if (skillsGrid) {
 // Blog System
 async function initBlog() {
     try {
-        const response = await fetch('/src/content/blog-meta.json');
+        const response = await fetch('/content/blog-meta.json');
         const blogs = await response.json();
         const blogList = document.querySelector('#blog-list');
         const blogPostView = document.querySelector('#blog-post-view');

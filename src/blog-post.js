@@ -48,7 +48,7 @@ async function renderPost() {
     }
 
     try {
-        const metaResponse = await fetch('/src/content/blog-meta.json');
+        const metaResponse = await fetch('/content/blog-meta.json');
         const blogs = await metaResponse.json();
         const blog = blogs.find(b => b.id === postId);
 
@@ -63,7 +63,7 @@ async function renderPost() {
         blogDate.innerText = blog.date;
 
         // Fetch Markdown
-        const mdResponse = await fetch(`/src/content/blogs/${blog.file}`);
+        const mdResponse = await fetch(`/content/blogs/${blog.file}`);
         const text = await mdResponse.text();
         
         // Remove frontmatter
