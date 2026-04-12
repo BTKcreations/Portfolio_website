@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | BSTK</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="read-progress" class="progress-bar"></div>
+    <div id="custom-cursor"></div>
+    <div id="app">
+        <header id="navbar" class="glass">
+            <nav>
+                <div class="logo">BSTK</div>
+                <ul class="nav-links">
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/index.html#projects">Projects</a></li>
+                    <li><a href="/index.html#blog">Blog</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="blog-hero">
+            <div class="hero-bg-overlay"></div>
+            <div class="container blog-hero-content">
+                <a href="/index.html#blog" class="back-link">← Portfolio</a>
+                <div class="blog-meta-top">
+                    <span id="blog-date" class="tech-tag">Loading...</span>
+                    <span id="read-time" class="tech-tag">-- min read</span>
+                </div>
+                <h1 id="blog-title" class="reveal-text">Loading Article...</h1>
+            </div>
+        </section>
+
+        <main class="blog-main-container">
+            <aside id="toc-container" class="glass toc-wrapper">
+                <h3>Contents</h3>
+                <nav id="toc-nav"></nav>
+            </aside>
+
+            <article id="blog-content" class="premium-article">
+                <!-- Content injected here -->
+            </article>
+
+            <div class="share-section glass container">
+                <h3>Share this post</h3>
+                <div class="hero-btns" style="justify-content: flex-start; margin-top: 20px;">
+                    <button onclick="window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.href))" class="btn btn-outline">Twitter</button>
+                    <button onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href))" class="btn btn-outline">LinkedIn</button>
+                    <button id="copy-link" class="btn btn-outline">Copy Link</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Tharun Kumar Budde. <a href="https://bstk.in" class="gradient-text">bstk.in</a></p>
+        </footer>
+    </div>
+    <script type="module" src="./src/blog-post.js"></script>
+</body>
+</html>
