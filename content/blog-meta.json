@@ -1,0 +1,29 @@
+[
+  {
+    "id": "langchain-usage",
+    "title": "Mastering LangChain for LLM Apps",
+    "date": "2026-04-12",
+    "summary": "A deep dive into building powerful LLM-powered applications using the LangChain framework.",
+    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+    "tags": ["LangChain", "LLM", "Python"],
+    "file": "langchain-usage.md"
+  },
+  {
+    "id": "ollama-usage",
+    "title": "Run LLMs Locally with Ollama",
+    "date": "2026-04-12",
+    "summary": "Learn how to deploy and run sophisticated large language models on your own machine using Ollama.",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc48?auto=format&fit=crop&w=800&q=80",
+    "tags": ["Ollama", "LocalLLM", "AI"],
+    "file": "ollama-usage.md"
+  },
+  {
+    "id": "agent-benefits",
+    "title": "The Power of Agentic AI",
+    "date": "2026-04-12",
+    "summary": "Why goal-oriented AI agents are the next major evolution in software engineering and productivity.",
+    "image": "https://images.unsplash.com/photo-1531746790731-6c087fecd05a?auto=format&fit=crop&w=800&q=80",
+    "tags": ["AI Agents", "Automation", "FutureTech"],
+    "file": "agent-benefits.md"
+  }
+]

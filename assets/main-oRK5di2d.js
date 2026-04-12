@@ -12,7 +12,7 @@ import{g as m,H as c}from"./github-dark-B1p9xQmx.js";m.setOptions({highlight:fun
             <div class="skill-items">
                 ${e.items.map(o=>`<span class="skill-item">${o}</span>`).join("")}
             </div>
-        `,d.appendChild(t),r.observe(t)});async function h(){try{const t=await(await fetch("/src/content/blog-meta.json")).json(),o=document.querySelector("#blog-list"),v=document.querySelector("#blog-post-view"),b=document.querySelector("#blog-content"),f=document.querySelector("#back-to-blog");o&&t.forEach(a=>{const n=document.createElement("div");n.className="project-card glass reveal",n.innerHTML=`
+        `,d.appendChild(t),r.observe(t)});async function h(){try{const t=await(await fetch("/content/blog-meta.json")).json(),o=document.querySelector("#blog-list"),v=document.querySelector("#blog-post-view"),b=document.querySelector("#blog-content"),f=document.querySelector("#back-to-blog");o&&t.forEach(a=>{const n=document.createElement("div");n.className="project-card glass reveal",n.innerHTML=`
                     <div class="project-img" style="background-image: url('${a.image}')"></div>
                     <div class="project-info">
                         <span class="tech-tag">${a.date}</span>
