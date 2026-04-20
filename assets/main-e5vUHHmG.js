@@ -12,7 +12,7 @@ import{g as m,H as c}from"./github-CC2B2dEM.js";m.setOptions({highlight:function
             <div class="skill-items">
                 ${e.items.map(a=>`<span class="skill-item">${a}</span>`).join("")}
             </div>
-        `,d.appendChild(t),n.observe(t)});async function g(){try{const t=await(await fetch("/content/blog-meta.json")).json(),a=document.querySelector("#blog-list"),v=document.querySelector("#blog-post-view"),y=document.querySelector("#blog-content"),b=document.querySelector("#back-to-blog");a&&t.forEach(s=>{const r=document.createElement("div");r.className="project-card glass reveal",r.innerHTML=`
+        `,d.appendChild(t),n.observe(t)});async function g(){try{const t=await(await fetch("content/blog-meta.json")).json(),a=document.querySelector("#blog-list"),v=document.querySelector("#blog-post-view"),y=document.querySelector("#blog-content"),b=document.querySelector("#back-to-blog");a&&t.forEach(s=>{const r=document.createElement("div");r.className="project-card glass reveal",r.innerHTML=`
                     <div class="project-img" style="background-image: url('${s.image}')"></div>
                     <div class="project-info">
                         <span class="tech-tag">${s.date}</span>
