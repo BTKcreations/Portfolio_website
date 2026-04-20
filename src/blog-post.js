@@ -1,7 +1,7 @@
 import { marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/github-dark.css';
+import 'highlight.js/styles/github.css';
 
 // Configure marked with highlight extension
 marked.use(markedHighlight({
@@ -25,6 +25,26 @@ document.addEventListener('mousemove', (e) => {
     cursor.style.left = e.clientX + 'px';
     cursor.style.top = e.clientY + 'px';
 });
+
+// Hover effects for cursor
+const addCursorHover = (elements) => {
+    elements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'scale(2.5)';
+            cursor.style.background = 'rgba(37, 99, 235, 0.1)';
+            cursor.style.border = '1px solid var(--primary-color)';
+            cursor.style.opacity = '1';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'scale(1)';
+            cursor.style.background = 'var(--primary-color)';
+            cursor.style.border = 'none';
+            cursor.style.opacity = '0.3';
+        });
+    });
+};
+
+addCursorHover(document.querySelectorAll('a, button, .btn'));
 
 // Reading Progress
 window.addEventListener('scroll', () => {
@@ -76,6 +96,9 @@ async function renderPost() {
 
         // Parse and Inject
         blogContent.innerHTML = marked.parse(cleanText);
+
+        // Apply cursor effects to new links in content
+        addCursorHover(blogContent.querySelectorAll('a'));
 
         // Generate TOC
         const headings = blogContent.querySelectorAll('h2, h3');

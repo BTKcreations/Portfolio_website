@@ -1,6 +1,6 @@
 import { marked } from 'marked';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/github-dark.css';
+import 'highlight.js/styles/github.css';
 
 // Configure marked
 marked.setOptions({
@@ -83,13 +83,15 @@ const interactiveElements = document.querySelectorAll('a, button, .btn, .project
 interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
         cursor.style.transform = 'scale(2.5)';
-        cursor.style.background = 'rgba(255,255,255,0.1)';
-        cursor.style.border = '1px solid white';
+        cursor.style.background = 'rgba(37, 99, 235, 0.1)';
+        cursor.style.border = '1px solid var(--primary-color)';
+        cursor.style.opacity = '1';
     });
     el.addEventListener('mouseleave', () => {
         cursor.style.transform = 'scale(1)';
-        cursor.style.background = 'white';
+        cursor.style.background = 'var(--primary-color)';
         cursor.style.border = 'none';
+        cursor.style.opacity = '0.3';
     });
 });
 
@@ -173,11 +175,13 @@ window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
         navbar.style.top = '10px';
         navbar.style.width = '95%';
-        navbar.style.background = 'rgba(10, 10, 12, 0.8)';
+        navbar.style.background = 'rgba(255, 255, 255, 0.9)';
+        navbar.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.1)';
     } else {
         navbar.style.top = '20px';
         navbar.style.width = '90%';
         navbar.style.background = 'var(--glass-bg)';
+        navbar.style.boxShadow = 'var(--card-shadow)';
     }
 });
 
