@@ -21,13 +21,16 @@ marked.setOptions({
 
 // Custom Cursor
 const cursor = document.querySelector('#custom-cursor');
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-});
+if (cursor) {
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+}
 
 // Hover effects for cursor
 const addCursorHover = (elements) => {
+    if (!cursor) return;
     elements.forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursor.style.transform = 'scale(2.5)';
@@ -49,8 +52,9 @@ addCursorHover(document.querySelectorAll('a, button, .btn'));
 // Reading Progress
 window.addEventListener('scroll', () => {
     const progress = document.querySelector('#read-progress');
+    if (!progress) return;
     const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-    if (progress) progress.style.width = scrollPercent + '%';
+    progress.style.width = scrollPercent + '%';
 });
 
 async function renderPost() {
@@ -63,7 +67,7 @@ async function renderPost() {
     const tocNav = document.querySelector('#toc-nav');
 
     if (!postId) {
-        blogContent.innerHTML = '<h2>Post not found</h2><a href="/index.html">Go Home</a>';
+        if (blogContent) blogContent.innerHTML = '<h2>Post not found</h2><a href="/index.html">Go Home</a>';
         return;
     }
 
@@ -73,17 +77,20 @@ async function renderPost() {
         const blog = blogs.find(b => b.id === postId);
 
         if (!blog) {
-            blogContent.innerHTML = '<h2>Post not found</h2>';
+            if (blogContent) blogContent.innerHTML = '<h2>Post not found</h2>';
             return;
         }
 
         // Update Hero and Metadata
         document.title = `${blog.title} | BSTK Blog`;
-        blogTitle.innerText = blog.title;
-        blogDate.innerText = blog.date;
+        if (blogTitle) blogTitle.innerText = blog.title;
+        if (blogDate) blogDate.innerText = blog.date;
 
         // Fetch Markdown
-        const mdResponse = await fetch(`/content/blogs/${blog.file}`);
+        const mdPath = `/content/blogs/${blog.file}`;
+        const mdResponse = await fetch(mdPath);
+        if (!mdResponse.ok) throw new Error(`Failed to fetch markdown: ${mdResponse.status}`);
+        
         const text = await mdResponse.text();
         
         // Remove frontmatter
@@ -92,73 +99,82 @@ async function renderPost() {
         // Calculate read time
         const words = cleanText.split(/\s+/).length;
         const minutes = Math.ceil(words / 200);
-        readTime.innerText = `${minutes} min read`;
+        if (readTime) readTime.innerText = `${minutes} min read`;
 
         // Parse and Inject
-        blogContent.innerHTML = marked.parse(cleanText);
-
-        // Apply cursor effects to new links in content
-        addCursorHover(blogContent.querySelectorAll('a'));
-
-        // Generate TOC
-        const headings = blogContent.querySelectorAll('h2, h3');
-        const tocLinks = [];
-        
-        headings.forEach((heading, index) => {
-            const id = `heading-${index}`;
-            heading.id = id;
-            const link = document.createElement('a');
-            link.href = `#${id}`;
-            link.innerText = heading.innerText;
-            link.classList.add(`toc-${heading.tagName.toLowerCase()}`);
+        if (blogContent) {
+            blogContent.innerHTML = marked.parse(cleanText);
             
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.getElementById(id);
-                const offset = 120; // Room for navbar
-                const bodyRect = document.body.getBoundingClientRect().top;
-                const elementRect = target.getBoundingClientRect().top;
-                const elementPosition = elementRect - bodyRect;
-                const offsetPosition = elementPosition - offset;
+            // Apply cursor effects to new links in content
+            addCursorHover(blogContent.querySelectorAll('a'));
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
+            // Generate TOC
+            const headings = blogContent.querySelectorAll('h2, h3');
+            const tocLinks = [];
+            
+            if (tocNav) {
+                tocNav.innerHTML = ''; // Clear loading
+                headings.forEach((heading, index) => {
+                    const id = `heading-${index}`;
+                    heading.id = id;
+                    const link = document.createElement('a');
+                    link.href = `#${id}`;
+                    link.innerText = heading.innerText;
+                    link.classList.add(`toc-${heading.tagName.toLowerCase()}`);
+                    
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.getElementById(id);
+                        const offset = 120; // Room for navbar
+                        const bodyRect = document.body.getBoundingClientRect().top;
+                        const elementRect = target.getBoundingClientRect().top;
+                        const elementPosition = elementRect - bodyRect;
+                        const offsetPosition = elementPosition - offset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    });
+                    
+                    tocNav.appendChild(link);
+                    tocLinks.push({ id, link, heading });
+                });
+            }
+
+            // Scroll-Spy Logic
+            window.addEventListener('scroll', () => {
+                let current = '';
+                headings.forEach(heading => {
+                    const sectionTop = heading.offsetTop;
+                    if (window.scrollY >= sectionTop - 150) {
+                        current = heading.id;
+                    }
+                });
+
+                tocLinks.forEach(item => {
+                    item.link.classList.remove('active');
+                    if (item.id === current) {
+                        item.link.classList.add('active');
+                    }
                 });
             });
-            
-            tocNav.appendChild(link);
-            tocLinks.push({ id, link, heading });
-        });
-
-        // Scroll-Spy Logic
-        window.addEventListener('scroll', () => {
-            let current = '';
-            headings.forEach(heading => {
-                const sectionTop = heading.offsetTop;
-                if (window.scrollY >= sectionTop - 150) {
-                    current = heading.id;
-                }
-            });
-
-            tocLinks.forEach(item => {
-                item.link.classList.remove('active');
-                if (item.id === current) {
-                    item.link.classList.add('active');
-                }
-            });
-        });
+        }
 
         // Copy Link logic
-        document.querySelector('#copy-link').addEventListener('click', (e) => {
-            navigator.clipboard.writeText(window.location.href);
-            e.target.innerText = 'Copied!';
-            setTimeout(() => e.target.innerText = 'Copy Link', 2000);
-        });
+        const copyBtn = document.querySelector('#copy-link');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', (e) => {
+                navigator.clipboard.writeText(window.location.href);
+                const originalText = copyBtn.innerText;
+                copyBtn.innerText = 'Copied!';
+                setTimeout(() => copyBtn.innerText = originalText, 2000);
+            });
+        }
 
     } catch (err) {
         console.error('Failed to load blog post:', err);
-        blogContent.innerHTML = '<h2>Error loading post</h2>';
+        if (blogContent) blogContent.innerHTML = `<div style="text-align:center; padding: 40px;"><h2>Post could not be loaded</h2><p>${err.message}</p></div>`;
     }
 }
 
