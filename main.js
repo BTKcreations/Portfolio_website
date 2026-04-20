@@ -17,8 +17,20 @@ marked.setOptions({
 // Project Data
 const projects = [
     {
+        title: "SecureVault - Cloud Encrypted File Sharing",
+        description: "Built a secure file-sharing platform with AES-256 encryption-at-rest, JWT auth, Bcrypt hashing, and owner-only RBAC access.",
+        tech: ["React", "Node.js", "Express", "MongoDB", "AES-256", "JWT"],
+        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        title: "ShopSmart AI - E-commerce Platform",
+        description: "Developed an AI-driven e-commerce app with context-aware recommendations, secure admin controls, and real-time inventory sync.",
+        tech: ["React", "Node.js", "Express", "PostgreSQL", "OpenAI API"],
+        image: "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?auto=format&fit=crop&w=800&q=80"
+    },
+    {
         title: "Snooker Billing & Management System",
-        description: "Developed web-based billing system with role-based authentication and automated revenue tracking.",
+        description: "Architected a billing solution with role-based authentication, automated billing logic, and centralized revenue tracking.",
         tech: ["Next.js", "Firebase", "Tailwind"],
         image: "https://images.unsplash.com/photo-1594474139194-42f1cc053073?auto=format&fit=crop&w=800&q=80"
     },
@@ -29,18 +41,20 @@ const projects = [
         image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
     },
     {
-        title: "Misinformation Detection System",
-        description: "AI-based fact verification system using FastAPI, vector databases, and LLM reasoning.",
-        tech: ["Python", "FastAPI", "Vector DB", "LLM"],
+        title: "Fact vs Fiction - AI Fact-Checking System",
+        description: "Implemented a 4-step intelligence pipeline with web search, Wikipedia, ChromaDB RAG lookup, and Ollama verdict generation.",
+        tech: ["FastAPI", "ChromaDB", "spaCy", "Ollama", "React", "Chrome Extension"],
         image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80"
     }
 ];
 
 const skills = [
-    { name: "Programming", items: ["Python", "Java", "JavaScript", "C"] },
-    { name: "Web Technologies", items: ["React.js", "Next.js", "Tailwind CSS", "HTML5", "CSS3"] },
-    { name: "Backend & Databases", items: ["FastAPI", "Django", "PostgreSQL", "MongoDB", "Firebase"] },
-    { name: "Tools", items: ["Git", "GitHub", "VS Code", "Jupyter"] }
+    { name: "Programming & DSA", items: ["Python", "Java", "JavaScript", "C", "OOPS", "Data Structures & Algorithms"] },
+    { name: "Web Development", items: ["HTML5", "CSS3", "React.js", "Next.js", "Tailwind CSS", "PWA", "Chrome Extension Dev"] },
+    { name: "Backend & APIs", items: ["Node.js", "Express.js", "FastAPI", "Django", "REST APIs"] },
+    { name: "Databases & Vector DB", items: ["PostgreSQL", "MongoDB", "SQLite", "Firebase", "ChromaDB"] },
+    { name: "AI/ML & NLP", items: ["Machine Learning", "AI Workflows", "RAG Architecture", "LLM Orchestration (Ollama)", "spaCy"] },
+    { name: "Security & DevOps", items: ["AES-256", "Bcrypt", "JWT", "RBAC", "SDLC", "Agile", "Git", "GitHub", "VS Code"] }
 ];
 
 // Initialize Reveal Animations
